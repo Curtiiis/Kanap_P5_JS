@@ -1,7 +1,7 @@
 # Formation Dev Web - Projet 5 - Kanap
 
 ## Kanap : catalogue de canapés en ligne
-<p style="align:center">
+<p align="center">
   <img src="./front/images/logo_kanap.png" />
 </p>
 
