@@ -1,7 +1,10 @@
 # Formation Dev Web - Projet 5 - Kanap
 
 ## Kanap : catalogue de canapés en ligne
-<center>![Kanap](./front/images/logo_kanap.png "Kanap")</center>
+<p style="align:center">
+  <img src="./front/images/logo_kanap.png" />
+</p>
+
 ### Scénario
 
 Vous êtes en poste dans une agence de développement web depuis quelques semaines maintenant. Après avoir réalisé avec succès l’intégration de quelques sites web (HTML/CSS), on vous confie une nouvelle mission.
