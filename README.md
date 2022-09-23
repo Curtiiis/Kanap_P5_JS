@@ -36,6 +36,7 @@ Il suffit de se positionner dans le dossier backend avec un terminal et de saisi
 #### Lancement du serveur
 Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande 
 ```JS
+  /back
   npm run start
 ``` 
 Par défaut le serveur sera lancé sur le port 3010
@@ -43,16 +44,33 @@ Par défaut le serveur sera lancé sur le port 3010
 #### Route api
 Il y a 3 routes disponibles sur le serveur :
 
+HTTP | ROUTE | ATTENDU
+--- | --- | ---
+**GET** | `/api/products/` | *Permet de récupérer l'ensemble des produits disponibles*
+**GET** | `/api/products/{id}` | *{id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant*
+**POST** | `/api/products/order` | *Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
+```JS
+  {
+      contact{
+        firstName: <string>,
+        lastName: <string>,
+        address: <string>,
+        city; <string>,
+        email: <string>
+    },
+    products: [<string>]
+  }
+```
+products étant un tableau d'id produit.*
+
 ##### GET /api/products/
-: Permet de récupérer l'ensemble des produits disponibles
+Permet de récupérer l'ensemble des produits disponibles
 
 ##### GET /api/products/{id}
-: {id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant
+{id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant
 
 ##### POST /api/products/order
-: Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
-
-
+Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
 ```JS
   {
       contact{
