@@ -48,7 +48,7 @@ HTTP | ROUTE | ATTENDU
 --- | --- | ---
 **GET** | `/api/products/` | *Permet de récupérer l'ensemble des produits disponibles*
 **GET** | `/api/products/{id}` | *{id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant*
-**POST** | `/api/products/order` | *Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
+**POST** | `/api/products/order` | *Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant - products étant un tableau d'id produit.*
 ```JS
   {
       contact{
@@ -61,29 +61,6 @@ HTTP | ROUTE | ATTENDU
     products: [<string>]
   }
 ```
-products étant un tableau d'id produit.*
-
-##### GET /api/products/
-Permet de récupérer l'ensemble des produits disponibles
-
-##### GET /api/products/{id}
-{id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant
-
-##### POST /api/products/order
-Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
-```JS
-  {
-      contact{
-        firstName: <string>,
-        lastName: <string>,
-        address: <string>,
-        city; <string>,
-        email: <string>
-    },
-    products: [<string>]
-  }
-```
-products étant un tableau d'id produit.
 
 #### Frontend
 Le frontend présente la partie utilisateur de l'application. Il doit être lancé avec un serveur local et nécessite que le backend soit lancé lui aussi pour fonctionner correctement.
