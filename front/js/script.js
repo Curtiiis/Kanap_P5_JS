@@ -23,7 +23,7 @@ displayTotalQty()
 function addProduct(p) {
   document.getElementById("items").innerHTML +=
     `
-        <a href="./product.html?id=${p._id}">
+        <a href="./html/product.html?id=${p._id}">
             <article>
                 <img src="${p.imageUrl}" alt="${p.altTxt}">
                 <h3 class="productName">${p.name}</h3>

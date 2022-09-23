@@ -139,7 +139,7 @@ function redirect() {
   if (resultat) {
     window.location.replace(`http://${window.location.host}/front/html/cart.html`);
   } else {
-    window.location.replace(`http://${window.location.host}/front/html/index.html`);
+    window.location.replace(`http://${window.location.host}/front/`);
   }
 }
 
