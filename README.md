@@ -38,19 +38,19 @@ Il suffit de se positionner dans le dossier backend avec un terminal et de saisi
 ```JS
   npm run start
 ``` 
-Par défaut le serveur sera lancé sur le port 3010 ( https://cstrazel.fr:3002 )
+Par défaut le serveur sera lancé sur le port 3010
 
 #### Route api
 Il y a 3 routes disponibles sur le serveur :
 
 ##### GET /api/products/
-Permet de récupérer l'ensemble des produits disponibles
+: Permet de récupérer l'ensemble des produits disponibles
 
 ##### GET /api/products/{id}
-{id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant
+: {id} : identifiant unique d'un produit Permet de récupérer un produit par son identifiant
 
 ##### POST /api/products/order
-Envoie une commande pour l'enregistrer La commande envoyé doit être au format JSON suivant :
+: Envoie une commande pour l'enregistrer. La commande envoyé doit être au format JSON suivant :
 
 
 ```JS
@@ -68,7 +68,7 @@ Envoie une commande pour l'enregistrer La commande envoyé doit être au format 
 products étant un tableau d'id produit.
 
 #### Frontend
-Le frontend présente la partie utilisateur de l'application. Il doit être lancé avec un serveur local (live server avec vscode par exemple), et nécessite que le backend soit lancé lui aussi pour fonctionner correctement.
+Le frontend présente la partie utilisateur de l'application. Il doit être lancé avec un serveur local et nécessite que le backend soit lancé lui aussi pour fonctionner correctement.
 
 ##### Config
 Le fichier de config permet de définir l'adresse de base du server, avec son host, port et si un certificat ssl est utilisé ou non.
