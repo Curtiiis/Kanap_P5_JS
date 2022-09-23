@@ -31,13 +31,11 @@ Le dossier back permet de faire tourner l'api contenant les données des produit
 #### Installation
 Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande 
 ```
-  //back
   npm install
 ``` 
 #### Lancement du serveur
 Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande 
 ```
-  //back
   npm run start
 ``` 
 Par défaut le serveur sera lancé sur le port 3010
