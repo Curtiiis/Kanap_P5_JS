@@ -5,6 +5,9 @@
   <img src="./front/images/logo_kanap.png" />
 </p>
 
+### VOIR LE SITE
+<a href="https://cstrazel.fr/kanap/">Kanap</a>
+
 ### Scénario
 
 Vous êtes en poste dans une agence de développement web depuis quelques semaines maintenant. Après avoir réalisé avec succès l’intégration de quelques sites web (HTML/CSS), on vous confie une nouvelle mission.
