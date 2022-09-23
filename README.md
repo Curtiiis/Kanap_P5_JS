@@ -36,7 +36,7 @@ Il suffit de se positionner dans le dossier backend avec un terminal et de saisi
 #### Lancement du serveur
 Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande 
 ```JS
-  /back
+  //back
   npm run start
 ``` 
 Par défaut le serveur sera lancé sur le port 3010
