@@ -3,10 +3,12 @@
 //**********************************************************//
 
 //Afficher dynamiquement la liste de produits dans la page d'accueil => Requête Ajax (fetch)
-fetch("http://localhost:3000/api/products")
+fetch("https://cstrazel.fr:3002/api/products")
+  // const base_url = "http://localhost:3010";
+  // fetch("http://localhost:3000/api/products")
   .then((response) => response.json())
   .then((allProducts) => {
-    // console.table(allProducts)
+    console.table(allProducts)
     for (let i = 0; i < allProducts.length; i++) {
       addProduct(allProducts[i]);
     }
@@ -23,7 +25,7 @@ displayTotalQty()
 function addProduct(p) {
   document.getElementById("items").innerHTML +=
     `
-        <a href="./html/product.html?id=${p._id}">
+        <a href="/html/product.html?id=${p._id}">
             <article>
                 <img src="${p.imageUrl}" alt="${p.altTxt}">
                 <h3 class="productName">${p.name}</h3>

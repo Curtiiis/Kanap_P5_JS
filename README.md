@@ -36,7 +36,7 @@ Il suffit de se positionner dans le dossier backend avec un terminal et de saisi
 ```JS
   npm run start
 ``` 
-Par défaut le serveur sera lancé sur le port 3000 ( http://localhost:3000 )
+Par défaut le serveur sera lancé sur le port 3010 ( https://cstrazel.fr:3002 )
 
 #### Route api
 Il y a 3 routes disponibles sur le serveur :

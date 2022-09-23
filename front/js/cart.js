@@ -3,7 +3,8 @@
 //**********************************************************//
 
 //Afficher dynamiquement les produits du panier => Requête Ajax (fetch)
-fetch(`http://localhost:3000/api/products/`)
+fetch("https://cstrazel.fr:3002/api/products/")
+  // fetch("http://localhost:3000/api/products")
   .then((response) => response.json())
   .then((allProducts) => {
     // console.table(allProducts)
@@ -207,7 +208,7 @@ fetch(`http://localhost:3000/api/products/`)
       document.getElementById("order").addEventListener("click", (e) => {
         e.preventDefault();
         if (checkValidityFormInputs()) {
-          fetch("http://localhost:3000/api/products/order", {
+          fetch("https://cstrazel.fr:3002/api/products/order", {
             method: "POST",
             headers: {
               Accept:

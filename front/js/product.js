@@ -3,7 +3,7 @@
 //**********************************************************//
 
 //Afficher dynamiquement le produit cliqué la page d'accueil => Requête Ajax (fetch)
-fetch(`http://localhost:3000/api/products/${getId()}`)
+fetch("https://cstrazel.fr:3002/api/products/" + getId())
   .then((response) => response.json())
   .then((product) => {
     display(product);
@@ -137,9 +137,9 @@ function isCartEmpty() {
 function redirect() {
   const resultat = window.confirm("Merci, vous allez être redirigé vers le panier. (Ok) \n Si vous souhaitez continuer vos achats, cliquez sur Annuler")
   if (resultat) {
-    window.location.replace(`http://${window.location.host}/front/html/cart.html`);
+    window.location.replace(window.location.origin + "/kanap/html/cart.html");
   } else {
-    window.location.replace(`http://${window.location.host}/front/`);
+    window.location.replace(window.location.href + "/");
   }
 }
 
