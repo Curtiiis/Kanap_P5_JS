@@ -11,13 +11,12 @@ body {
 h1 {
 	font-size: 48px;
 	font-weight: 700;
-	/* margin-top: 135px; */
 	text-align: center;
 }
 h2 {
 	font-weight: 400;
 	margin-bottom: 20px;
-	/* margin-bottom: 60px; */
+	margin-bottom: 60px;
 	text-align: center;
 }
 .logo {
@@ -43,7 +42,7 @@ h2 {
 	--footer-text-color: #a6b0b3; 
 	--footer-main-color: #3d424f; 
 	--footer-secondary-color: #2d2f3e;
-	/*background-color: var(--main-color);*/
+	background-color: var(--main-color);
 }
 
 
@@ -109,7 +108,7 @@ h2 {
 /*banniere*/
 .banniere {
 	width: 100%;
-	height: 550px;
+	height: 300px;
 	object-fit: cover;
 	display: flex;
 }
@@ -127,7 +126,7 @@ main {
 
 /*items*/
 .items {
-	margin-bottom: 135px;
+	/* margin-bottom: 135px; */
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;

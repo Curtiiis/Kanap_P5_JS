@@ -32,7 +32,11 @@ Le dossier back permet de faire tourner l'api contenant les données des produit
 Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande npm install
 
 #### Lancement du serveur
-Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande node start Par défaut le serveur sera lancé sur le port 3000 ( http://localhost:3000 )
+Il suffit de se positionner dans le dossier backend avec un terminal et de saisir la commande 
+```JS
+  npm run start
+``` 
+Par défaut le serveur sera lancé sur le port 3000 ( http://localhost:3000 )
 
 #### Route api
 Il y a 3 routes disponibles sur le serveur :

@@ -4,67 +4,67 @@
 
 //Afficher dynamiquement les produits du panier => Requête Ajax (fetch)
 fetch(`http://localhost:3000/api/products/`)
-.then((response) => response.json())
-.then((allProducts) => {
-  console.table(allProducts)
-  let cartProducts = JSON.parse(localStorage.getItem("products"));
-  console.table(cartProducts)
-  //Si le panier n'est pas vide
-  if (cartProducts) {
-    //Ajouter le formulaire 
-    addForm()
+  .then((response) => response.json())
+  .then((allProducts) => {
+    // console.table(allProducts)
+    let cartProducts = JSON.parse(localStorage.getItem("products"));
+    // console.table(cartProducts)
+    //Si le panier n'est pas vide
+    if (cartProducts) {
+      //Ajouter le formulaire 
+      addForm()
 
-    //Reporter les données du panier dans le tableau allProducts
-    getCompleteProducts()
-    console.table(allProducts)
-    
-    //Injecter les articles du panier dans le DOM
-    for (let i = 0; i < allProducts.length; i++) {
-      if (allProducts[i].color != undefined) {
-        addArticle(allProducts[i]);
+      //Reporter les données du panier dans le tableau allProducts
+      getCompleteProducts()
+      // console.table(allProducts)
+
+      //Injecter les articles du panier dans le DOM
+      for (let i = 0; i < allProducts.length; i++) {
+        if (allProducts[i].color != undefined) {
+          addArticle(allProducts[i]);
+        }
       }
-    }
 
-    //Calcul initial de la quantité et du prix total et les afficher côté client
-    getTotalQty();
-    getTotalPrice();
-    displayTotalQty();
+      //Calcul initial de la quantité et du prix total et les afficher côté client
+      getTotalQty();
+      getTotalPrice();
+      displayTotalQty();
 
-    //Contrôle et modification de la quantité totale de produits dans le panier
-    //  => Modification des quantités dans le panier
-    for (let i = 0; i < cartProducts.length; i++) {
-      document.getElementsByClassName("itemQuantity")[i].addEventListener("input", (e) => {
+      //Contrôle et modification de la quantité totale de produits dans le panier
+      //  => Modification des quantités dans le panier
+      for (let i = 0; i < cartProducts.length; i++) {
+        document.getElementsByClassName("itemQuantity")[i].addEventListener("input", (e) => {
           let eTargetValue = e.target.value;
           const eTargetDataId = e.target.getAttribute("data-id");
           const eTargetDataColor = e.target.getAttribute("data-color");
-  
+
           //  => Contrôle de la validité des quantités
-          if(eTargetValue > 0 && eTargetValue < 100) {
+          if (eTargetValue > 0 && eTargetValue < 100) {
             changeQtyInCart();
           } else {
             alert("Merci de choisir une quantité entre 1 et 100.")
           }
           location.reload()
-          
-  
+
+
           //************ FONCTIONS ADDEVENTLISTENER ************//
           //Fonction : "Modifier les quantités dans le panier lors de la modification DOM côté client"
           function changeQtyInCart() {
             const productQtyToChange = cartProducts.find((item) =>
-                item._id == eTargetDataId && item.color == eTargetDataColor);
+              item._id == eTargetDataId && item.color == eTargetDataColor);
             if (productQtyToChange) {
               productQtyToChange.qty = Number(eTargetValue);
               localStorage.setItem("products", JSON.stringify(cartProducts));
             }
           }
-  
+
         }); // close itemQuantity listener
-  
-      // => Suppression d'un article
-      document.getElementsByClassName("deleteItem")[i].addEventListener("click", (e) => {
+
+        // => Suppression d'un article
+        document.getElementsByClassName("deleteItem")[i].addEventListener("click", (e) => {
           deleteItem()
           location.reload()
-  
+
           //************ FONCTIONS ADDEVENTLISTENER ************//
           function deleteItem() {
             const eTargetDataId = e.target.getAttribute("data-id");
@@ -74,11 +74,11 @@ fetch(`http://localhost:3000/api/products/`)
               `article[data-id="${eTargetDataId}"][data-color="${eTargetDataColor}"]`
             );
             elementClosest.remove();
-    
+
             //=> Côté serveur
-            let cartProduct = cartProducts.findIndex((x) => 
+            let cartProduct = cartProducts.findIndex((x) =>
               x._id == eTargetDataId && x.color == eTargetDataColor);
-              
+
             if (cartProducts.length == 1) {
               localStorage.clear()
             } else {
@@ -87,11 +87,11 @@ fetch(`http://localhost:3000/api/products/`)
             }
           }
         }); // close deleteItem listener
-    } //close boucle
-    
-    
+      } //close boucle
 
-    //Contrôle de la validité des champs du formulaire (méthode Regex)
+
+
+      //Contrôle de la validité des champs du formulaire (méthode Regex)
 
       // => Contrôle du champs "Prénom"
       const prenom = document.getElementById("firstName");
@@ -100,17 +100,17 @@ fetch(`http://localhost:3000/api/products/`)
         if (prenom.value.length === 0 || prenom.value.length < prenom.getAttribute("minlength")) {
           prenomNextSibling.textContent = "";
           prenom.classList.remove("valid", "invalid");
-        } 
+        }
         else if (prenom.value.length >= prenom.getAttribute("minlength")) {
-            if (regexPrenom(prenom.value)) {
-              prenomNextSibling.textContent = "";
-              prenom.classList.add("valid");
-              prenom.classList.remove("invalid");
-            } else {
-              prenomNextSibling.textContent = `Le champ ${prenom.getAttribute("data-name")} doit contenir uniquement des lettres`;
-              prenom.classList.add("invalid");
-              prenom.classList.remove("valid");
-            }
+          if (regexPrenom(prenom.value)) {
+            prenomNextSibling.textContent = "";
+            prenom.classList.add("valid");
+            prenom.classList.remove("invalid");
+          } else {
+            prenomNextSibling.textContent = `Le champ ${prenom.getAttribute("data-name")} doit contenir uniquement des lettres`;
+            prenom.classList.add("invalid");
+            prenom.classList.remove("valid");
+          }
         }
         enableOrderBtn()
       });
@@ -123,15 +123,15 @@ fetch(`http://localhost:3000/api/products/`)
           nomNextSibling.textContent = "";
           nom.classList.remove("valid", "invalid");
         } else if (nom.value.length >= nom.getAttribute("minlength")) {
-            if (regexNom(nom.value)) {
-              nomNextSibling.textContent = "";
-              nom.classList.add("valid");
-              nom.classList.remove("invalid");
-            } else {
-              nomNextSibling.textContent = `Le champ ${nom.getAttribute("data-name")} doit contenir uniquement des lettres`;
-              nom.classList.add("invalid");
-              nom.classList.remove("valid");
-            }
+          if (regexNom(nom.value)) {
+            nomNextSibling.textContent = "";
+            nom.classList.add("valid");
+            nom.classList.remove("invalid");
+          } else {
+            nomNextSibling.textContent = `Le champ ${nom.getAttribute("data-name")} doit contenir uniquement des lettres`;
+            nom.classList.add("invalid");
+            nom.classList.remove("valid");
+          }
         }
         enableOrderBtn()
       });
@@ -144,19 +144,19 @@ fetch(`http://localhost:3000/api/products/`)
           cityNextSibling.textContent = "";
           city.classList.remove("valid", "invalid");
         } else if (city.value.length >= city.getAttribute("minlength")) {
-            if (regexCity(city.value)) {
-              cityNextSibling.textContent = "";
-              city.classList.add("valid");
-              city.classList.remove("invalid");
-            } else {
-              cityNextSibling.textContent = `Le champ ${city.getAttribute("data-name")} doit contenir uniquement des lettres`;
-              city.classList.add("invalid");
-              city.classList.remove("valid");
-            }
+          if (regexCity(city.value)) {
+            cityNextSibling.textContent = "";
+            city.classList.add("valid");
+            city.classList.remove("invalid");
+          } else {
+            cityNextSibling.textContent = `Le champ ${city.getAttribute("data-name")} doit contenir uniquement des lettres`;
+            city.classList.add("invalid");
+            city.classList.remove("valid");
+          }
         }
         enableOrderBtn()
       });
-        
+
       // => Contrôle du champ "Adresse"
       const address = document.getElementById("address");
       const addressNextSibling = address.nextElementSibling;
@@ -164,15 +164,15 @@ fetch(`http://localhost:3000/api/products/`)
         if (address.value.length === 0 || address.value.length < address.getAttribute("minlength")) {
           addressNextSibling.textContent = "";
           address.classList.remove("valid", "invalid");
-        } 
+        }
         else if (address.value.length >= address.getAttribute("minlength")) {
           if (regexAddress(address.value)) {
             addressNextSibling.textContent = "";
             address.classList.add("valid");
             address.classList.remove("invalid");
           } else {
-            addressNextSibling.textContent = 
-            `Le champ ${address.getAttribute("data-name")} doit contenir uniquement des chiffres et des lettres`;
+            addressNextSibling.textContent =
+              `Le champ ${address.getAttribute("data-name")} doit contenir uniquement des chiffres et des lettres`;
             address.classList.add("invalid");
             address.classList.remove("valid");
           }
@@ -187,51 +187,51 @@ fetch(`http://localhost:3000/api/products/`)
         if (email.value.length === 0 || email.value.length < email.getAttribute("minlength")) {
           emailNextSibling.textContent = "";
           email.classList.remove("valid", "invalid");
-        } 
+        }
         else if (email.value.length >= email.getAttribute("minlength")) {
-            if (regexEmail(email.value)) {
-              emailNextSibling.textContent = "";
-              email.classList.add("valid");
-              email.classList.remove("invalid");
-            } else {
-              emailNextSibling.textContent = 
-                `Le champ ${email.getAttribute("data-name")} doit contenir un @`;
-              email.classList.add("invalid");
-              email.classList.remove("valid");
-            }
+          if (regexEmail(email.value)) {
+            emailNextSibling.textContent = "";
+            email.classList.add("valid");
+            email.classList.remove("invalid");
+          } else {
+            emailNextSibling.textContent =
+              `Le champ ${email.getAttribute("data-name")} doit contenir un @`;
+            email.classList.add("invalid");
+            email.classList.remove("valid");
+          }
         }
         enableOrderBtn()
       });
 
-    //Envoyer les données du formulaire
-    document.getElementById("order").addEventListener("click", (e) => {
-      e.preventDefault();
-      if (checkValidityFormInputs()) {
-        fetch("http://localhost:3000/api/products/order", {
-          method: "POST",
-          headers: {
-            Accept: 
-              "application/json",
+      //Envoyer les données du formulaire
+      document.getElementById("order").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (checkValidityFormInputs()) {
+          fetch("http://localhost:3000/api/products/order", {
+            method: "POST",
+            headers: {
+              Accept:
+                "application/json",
               "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            contact: {
-              firstName: firstName.value,
-              lastName: lastName.value,
-              address: address.value,
-              city: city.value,
-              email: email.value,
             },
-            products: getProductsId(),
-          }),
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            localStorage.clear();
-            displayTotalQty();
+            body: JSON.stringify({
+              contact: {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                address: address.value,
+                city: city.value,
+                email: email.value,
+              },
+              products: getProductsId(),
+            }),
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              localStorage.clear();
+              displayTotalQty();
 
-            //Injection du numéro de commande dans le DOM
-            document.getElementById("limitedWidthBlock").innerHTML = `
+              //Injection du numéro de commande dans le DOM
+              document.getElementById("limitedWidthBlock").innerHTML = `
               <div class="confirmation">
                   <p>
                   Commande validée ! <br>
@@ -240,28 +240,28 @@ fetch(`http://localhost:3000/api/products/`)
                   </p>
               </div>
               `;
-          })
-      } 
-      else {
-        alert("Merci de remplir correctement le formulaire")
-        document.getElementById("order").disabled = true;
-        document.getElementById("order").style.cursor = "not-allowed";
-      }
-    });
-  }//close if(cartProducts)
+            })
+        }
+        else {
+          alert("Merci de remplir correctement le formulaire")
+          document.getElementById("order").disabled = true;
+          document.getElementById("order").style.cursor = "not-allowed";
+        }
+      });
+    }//close if(cartProducts)
 
 
 
-  //***********************************//
-  //************ FONCTIONS ************//
-  //***********************************//
+    //***********************************//
+    //************ FONCTIONS ************//
+    //***********************************//
 
-  function getCompleteProducts() {
+    function getCompleteProducts() {
       cartProducts.forEach((itemInCart) => {
         let isSimilarProductExist = allProducts.find(
           (x) => x._id == itemInCart._id && x.color == itemInCart.color
         );
-  
+
         if (isSimilarProductExist == undefined) {
           let completeProduct = allProducts.find((x) => x._id == itemInCart._id);
           let newProduct = {
@@ -277,13 +277,13 @@ fetch(`http://localhost:3000/api/products/`)
           allProducts.push(newProduct);
         }
       });
-    
-  }
 
-  //Fonction : "Ajouter dans le DOM un article correspondant dans le panier"
-  function addArticle(p) {
-    document.getElementById("cart__items").innerHTML += 
-    `
+    }
+
+    //Fonction : "Ajouter dans le DOM un article correspondant dans le panier"
+    function addArticle(p) {
+      document.getElementById("cart__items").innerHTML +=
+        `
       <article class="cart__item" data-id="${p._id}" data-color="${p.color}">
           <div class="cart__item__img">
             <a href="http://${window.location.host}/front/html/product.html?id=${p._id}">
@@ -310,89 +310,91 @@ fetch(`http://localhost:3000/api/products/`)
           </div>
       </article> 
     `;
-  }
+    }
 
-  //Fonction : "Calculer la quantité totale de produits dans le panier"
-  function getTotalQty() {cartProducts.map((x) => x.qty).reduce((total, n) => {
+    //Fonction : "Calculer la quantité totale de produits dans le panier"
+    function getTotalQty() {
+      cartProducts.map((x) => x.qty).reduce((total, n) => {
         return (totalQty = total + n);
       }, 0);
-    
+
       if (totalQty > 1) {
         document.getElementById("sTotalQuantity").textContent = "s";
       } else {
         document.getElementById("sTotalQuantity").textContent = "";
       }
       document.getElementById("totalQuantity").innerHTML = totalQty;
-  }
+    }
 
-  //Fonction : "Calculer la quantité totale de produits dans le panier"
-  function displayTotalQty(){
-    const cartQty = document.getElementById("cart__quantity");
-    if (!cartProducts) {
+    //Fonction : "Calculer la quantité totale de produits dans le panier"
+    function displayTotalQty() {
+      const cartQty = document.getElementById("cart__quantity");
+      if (!cartProducts) {
         cartQty.textContent = "";
         cartQty.classList.remove("cartQuantity");
         return 0;
-    } 
-    else {cartProducts.map((x) => x.qty).reduce((total, n) => {
-                return totalQty = total + n
-            }, 0)
-            cartQty.textContent = totalQty;
-            cartQty.classList.add("cartQuantity");
+      }
+      else {
+        cartProducts.map((x) => x.qty).reduce((total, n) => {
+          return totalQty = total + n
+        }, 0)
+        cartQty.textContent = totalQty;
+        cartQty.classList.add("cartQuantity");
+      }
     }
-  }
 
-  //Fonction : "Calculer le prix total du panier"
-  function getTotalPrice() {
+    //Fonction : "Calculer le prix total du panier"
+    function getTotalPrice() {
       cartProducts
-      .map((x) => x.price * x.qty)
-      .reduce((total, n) => {
-        return (totalPrice = total + n);
-      }, 0);
-    document.getElementById("totalPrice").innerHTML = totalPrice;
-    if (cartProducts.length == 0) {
-      document.getElementById("totalPrice").innerHTML = "";
+        .map((x) => x.price * x.qty)
+        .reduce((total, n) => {
+          return (totalPrice = total + n);
+        }, 0);
+      document.getElementById("totalPrice").innerHTML = totalPrice;
+      if (cartProducts.length == 0) {
+        document.getElementById("totalPrice").innerHTML = "";
+      }
     }
-  }
 
-  //Fonctions : "Contrôle de la validité du champ Prénom"
-  function regexPrenom(value) {
-    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
-  }
+    //Fonctions : "Contrôle de la validité du champ Prénom"
+    function regexPrenom(value) {
+      return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
+    }
 
-  //Fonctions : "Contrôle de la validité du champ Nom"
-  function regexNom(value) {
-    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
-  }
+    //Fonctions : "Contrôle de la validité du champ Nom"
+    function regexNom(value) {
+      return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
+    }
 
-  //Fonctions : "Contrôle de la validité du champ Ville"
-  function regexCity(value) {
-    return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
-  }
-  
-  function regexAddress(value) {
-    return /^[0-9a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ,'\s]{3,50}$/.test(value);
-  }
-  function regexEmail(value) {
-    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
-  }
-  function checkValidityFormInputs() {
-    let checkValidityFormInputs =
-      regexPrenom(firstName.value) && 
-      regexNom(lastName.value) && 
-      regexCity(city.value) && 
-      regexAddress(address.value) && 
-      regexEmail(email.value)
-    return checkValidityFormInputs;
-  }
+    //Fonctions : "Contrôle de la validité du champ Ville"
+    function regexCity(value) {
+      return /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ'\s-]{1,40}$/.test(value);
+    }
 
-  //Fonction :"Faire un array de products Id pour la requête POST"
-  function getProductsId() {
-    return cartProducts.map((x) => x._id);
-  }
+    function regexAddress(value) {
+      return /^[0-9a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ,'\s]{3,50}$/.test(value);
+    }
+    function regexEmail(value) {
+      return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value);
+    }
+    function checkValidityFormInputs() {
+      let checkValidityFormInputs =
+        regexPrenom(firstName.value) &&
+        regexNom(lastName.value) &&
+        regexCity(city.value) &&
+        regexAddress(address.value) &&
+        regexEmail(email.value)
+      return checkValidityFormInputs;
+    }
 
-  function addForm() {
+    //Fonction :"Faire un array de products Id pour la requête POST"
+    function getProductsId() {
+      return cartProducts.map((x) => x._id);
+    }
+
+    function addForm() {
       document.getElementById("cart__order__form").innerHTML =
-      `
+        `
       <div class="cart__order__form__question">
         <label for="firstName">Prénom: </label>
         <input type="text" name="firstName" id="firstName" data-name="prénom" data-control="onlyText" required minlength="1" maxlength="40">
@@ -422,14 +424,14 @@ fetch(`http://localhost:3000/api/products/`)
         <input type="submit" value="Commander !" id="order">
       </div>
       `
-  }
-  
-  //Activation du bouton "Commander"
-  function enableOrderBtn(){
-    if(checkValidityFormInputs()) {
-      document.getElementById("order").disabled = false;
-      document.getElementById("order").style.cursor = "pointer";
     }
-  }
 
-})//close fetch allProducts
+    //Activation du bouton "Commander"
+    function enableOrderBtn() {
+      if (checkValidityFormInputs()) {
+        document.getElementById("order").disabled = false;
+        document.getElementById("order").style.cursor = "pointer";
+      }
+    }
+
+  })//close fetch allProducts

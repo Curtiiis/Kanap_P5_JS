@@ -3,10 +3,10 @@
 /*********/
 
 main {
-	/* padding-bottom: 90px; */
+	padding-bottom: 90px;
 }
 h1 {
-	/* margin-bottom: 90px; */
+	margin-bottom: 90px;
 }
 h2 {
 	text-align: start;
@@ -78,7 +78,7 @@ h2 {
 /*******/
 .cart__price {
 	border-top: 1px solid white;
-	/* padding-top: 35px; */
+	padding-top: 35px;
 }
 .cart__price p {
 	text-align: end;
@@ -92,7 +92,7 @@ h2 {
 	display: flex;
 	justify-content: center;
 	margin-top: 20px;
-	/* margin-top: 90px; */
+	margin-top: 90px;
 }
 .cart__order__form {
 	width: 50%;
