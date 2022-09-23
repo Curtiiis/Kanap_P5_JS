@@ -5,8 +5,7 @@
   <img src="./front/images/logo_kanap.png" />
 </p>
 
-### VOIR LE SITE
-<a href="https://cstrazel.fr/kanap/">###**Kanap**</a>
+### VOIR LE SITE <a href="https://cstrazel.fr/kanap/">**Kanap**</a>
 
 ### Scénario
 
